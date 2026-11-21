@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Minimal local manifest for enuma (Xiaomi Pad 5 Pro 5G), LineageOS 24.0
+
+  This is a local manifest: drop it into .repo/local_manifests/ on top of
+  the stock LineageOS manifest. default.xml already provides build/,
+  frameworks/, packages/, vendor/lineage and the rest of the platform;
+  only the device-specific closure is listed here.
+
+  All seven projects are required. The dependency chain is:
+
+    device/xiaomi/enuma
+      lineage.dependencies -> device/xiaomi/sm8250-common
+      BoardConfig.mk       -> vendor/xiaomi/enuma          (blobs)
+      device.mk            -> vendor/xiaomi/enuma          (blobs)
+
+    device/xiaomi/sm8250-common
+      lineage.dependencies -> hardware/xiaomi
+      lineage.dependencies -> kernel/xiaomi/sm8250
+      kona.mk:407          -> vendor/xiaomi/sm8250-common  (blobs)
+      BoardConfigCommon.mk:238 -> vendor/xiaomi/sm8250-common (blobs)
+
+  Each revision pins the head of its lineage-24.0 branch so that
+  `repo sync` is reproducible; bump the SHA when moving forward.
+-->
+<manifest>
+  <remote name="awkox" fetch="https://github.com/awkox/" />
+  <remote name="lineageos" fetch="https://github.com/LineageOS/" />
+  <remote name="themuppets" fetch="https://github.com/TheMuppets/" />
+
+  <!-- Device tree: alioth base with the enuma rebrand stack on top -->
+  <project name="android_device_xiaomi_enuma" path="device/xiaomi/enuma"
+           remote="awkox" revision="e2d95ffc7459cfcf30e45866b0c0b7670c7e0416" />
+
+  <!-- sm8250-common device tree, pulled in by lineage.dependencies -->
+  <project name="android_device_xiaomi_sm8250-common" path="device/xiaomi/sm8250-common"
+           remote="lineageos" revision="69f7d5f8acb220d6ce37ac64489577ae7375acea" />
+
+  <!-- Xiaomi hardware HAL: fx tunnel interface stubs -->
+  <project name="android_hardware_xiaomi" path="hardware/xiaomi"
+           remote="lineageos" revision="7ce268770cbff0a14a4bbb73d88b26b00e967391" />
+
+  <!-- Kernel, ships vendor/xiaomi/enuma.config -->
+  <project name="android_kernel_xiaomi_sm8250" path="kernel/xiaomi/sm8250"
+           remote="lineageos" revision="6b34d24765327d746074c8e53b5ad0d24a51acc7" />
+
+  <!-- Device blobs -->
+  <project name="android_vendor_xiaomi_enuma" path="vendor/xiaomi/enuma"
+           remote="awkox" revision="59ae39ea8576fd93c0c0c7fb99c79b36495d97bf" />
+
+  <!-- Shared sm8250 blobs referenced by kona.mk and BoardConfigCommon.mk -->
+  <project name="proprietary_vendor_xiaomi_sm8250-common" path="vendor/xiaomi/sm8250-common"
+           remote="themuppets" revision="c48b43a4db777a1005f730ca1ff0c14d022055db" />
+</manifest>
