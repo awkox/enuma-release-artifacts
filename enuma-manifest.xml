@@ -30,7 +30,7 @@
 
   <!-- Device tree: alioth base with the enuma rebrand stack on top -->
   <project name="android_device_xiaomi_enuma" path="device/xiaomi/enuma"
-           remote="awkox" revision="c97525cb4e1dc144f63c4eaf71ffd89330f0b57a" />
+           remote="awkox" revision="fc48ddff3086ecab072bfc668f36826209f7cd64" />
 
   <!-- sm8250-common device tree, pulled in by lineage.dependencies -->
   <project name="android_device_xiaomi_sm8250-common" path="device/xiaomi/sm8250-common"
